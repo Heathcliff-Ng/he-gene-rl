@@ -1,0 +1,84 @@
+{
+  "sources": [
+    "Rep1",
+    "Rep2"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "device": "cuda",
+  "neighbors": 8,
+  "adaptation": {
+    "history_budgets": [
+      0,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "batch_size": 512,
+    "monitor_batch_size": 512,
+    "max_epochs": 12,
+    "min_epochs": 4,
+    "patience": 4,
+    "monitor_every": 1,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "count_weight": 0.1,
+    "gradient_clip": 5.0
+  },
+  "ppo": {
+    "max_iterations": 30,
+    "min_iterations": 8,
+    "patience": 8,
+    "monitor_every": 1,
+    "monitor_batch_size": 512,
+    "episodes_per_iteration": 1024,
+    "rollout_batch_size": 128,
+    "ppo_epochs": 4,
+    "minibatch_size": 2048,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "clip_ratio": 0.2,
+    "value_weight": 0.5,
+    "entropy_weight": 0.002,
+    "target_kl": 0.03,
+    "gradient_clip": 1.0,
+    "gae_lambda": 0.95,
+    "temperature": 0.25,
+    "hidden_dim": 128
+  },
+  "evaluation": {
+    "batch_size": 512,
+    "bootstrap_replicates": 2000,
+    "targets": [
+      "Rep1",
+      "Rep2"
+    ]
+  },
+  "hidden_dim": 128,
+  "pretraining": {
+    "batch_size": 256,
+    "max_epochs": 60,
+    "min_epochs": 12,
+    "monitor_every": 2,
+    "patience": 8,
+    "monitor_cells": 1024,
+    "history_budgets": [
+      0,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "identity_only_fraction": 0.15,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "gradient_clip": 5.0,
+    "count_weight": 0.1
+  }
+}

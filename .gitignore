@@ -1,0 +1,33 @@
+# Local environments and build outputs
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+.idea/
+.vscode/
+.DS_Store
+
+# Local datasets, trained models and generated outputs
+/data/
+/runs/
+/checkpoints/
+/predictions/
+/results/
+*.pt
+*.pth
+*.npy
+*.npz
+*.h5
+*.h5ad
+*.log
+*.part
+
+# Machine-specific settings and credentials
+.env
+.env.*
+!.env.example
+

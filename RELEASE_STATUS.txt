@@ -1,0 +1,16 @@
+Project assembly: 2026-11-02
+
+This directory packages an existing experimental implementation.
+The user requested that testing be deferred during project assembly.
+No unit tests, model inference, training, or reproduction experiments have been
+run for this standalone package. Existing tests are included for the next step.
+Static checks during assembly covered Python syntax, JSON parsing, local
+documentation links, package imports by source inspection, and copied artifact
+hashes. These do not establish runtime compatibility or numerical equivalence.
+Historical results in reports/ and docs/results.md were produced by the original
+experiment code; they are not a validation of this packaged version.
+
+Local data, imported checkpoints, and generated predictions are excluded from
+Git and from the source archive. Original experiment files remain unchanged.
+No GitHub repository has been created or pushed by this packaging operation.
+No software license has been selected on the author's behalf.

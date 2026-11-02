@@ -1,0 +1,22 @@
+name: Manual tests
+
+# Testing was deferred during project assembly. Enable a push/pull_request
+# trigger after the standalone migration has been validated.
+on:
+  workflow_dispatch:
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'torch>=2.7' --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -e '.[test]'
+      - name: Run unit tests
+        run: python -m pytest -q

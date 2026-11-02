@@ -1,0 +1,2278 @@
+{
+  "format": "he-gene-rl-legacy-results-v1",
+  "origin": "Historical experiments before the standalone-project migration.",
+  "validation_status": "not_runtime_verified_after_migration",
+  "tests_training_or_inference_executed_during_import": false,
+  "evaluation": {
+    "profile": "full",
+    "directions": {
+      "Rep1_to_Rep1": {
+        "n_cells": 4096,
+        "gene_count": 313,
+        "n_seeds_averaged": 3,
+        "primary_cross_section": false,
+        "means": {
+          "original_count_bce": {
+            "fp": 14.473876953125,
+            "fn": 12.647705078125,
+            "cost": 39.769287109375,
+            "selected": 49.09033203125
+          },
+          "spatialex": {
+            "fp": 16.522216796875,
+            "fn": 15.582763671875,
+            "cost": 47.687744140625,
+            "selected": 46.94677734375
+          },
+          "teacher_sequence": {
+            "fp": 17.026936848958332,
+            "fn": 11.312174479166666,
+            "cost": 39.651285807291664,
+            "selected": 54.031656901041664
+          },
+          "adapted_sequence": {
+            "fp": 11.846842447916668,
+            "fn": 13.292724609375,
+            "cost": 38.432291666666664,
+            "selected": 44.455322265625
+          },
+          "ppo_sequence": {
+            "fp": 12.479329427083334,
+            "fn": 12.959309895833334,
+            "cost": 38.39794921875,
+            "selected": 45.73575846354167
+          }
+        },
+        "per_seed": {
+          "original_count_bce/seed42": {
+            "fp": 14.435302734375,
+            "fn": 12.66796875,
+            "cost": 39.771240234375,
+            "selected": 49.001953125
+          },
+          "original_count_bce/seed43": {
+            "fp": 15.0947265625,
+            "fn": 12.370361328125,
+            "cost": 39.83544921875,
+            "selected": 50.309814453125
+          },
+          "original_count_bce/seed44": {
+            "fp": 13.8916015625,
+            "fn": 12.90478515625,
+            "cost": 39.701171875,
+            "selected": 47.959228515625
+          },
+          "spatialex/seed42": {
+            "fp": 16.522216796875,
+            "fn": 15.582763671875,
+            "cost": 47.687744140625,
+            "selected": 46.94677734375
+          },
+          "spatialex/seed43": {
+            "fp": 16.522216796875,
+            "fn": 15.582763671875,
+            "cost": 47.687744140625,
+            "selected": 46.94677734375
+          },
+          "spatialex/seed44": {
+            "fp": 16.522216796875,
+            "fn": 15.582763671875,
+            "cost": 47.687744140625,
+            "selected": 46.94677734375
+          },
+          "teacher_sequence/seed42": {
+            "fp": 17.5615234375,
+            "fn": 11.0234375,
+            "cost": 39.6083984375,
+            "selected": 55.17919921875
+          },
+          "teacher_sequence/seed43": {
+            "fp": 17.72705078125,
+            "fn": 11.1044921875,
+            "cost": 39.93603515625,
+            "selected": 55.17724609375
+          },
+          "teacher_sequence/seed44": {
+            "fp": 15.792236328125,
+            "fn": 11.80859375,
+            "cost": 39.409423828125,
+            "selected": 51.738525390625
+          },
+          "adapted_sequence/seed42": {
+            "fp": 11.7392578125,
+            "fn": 13.48486328125,
+            "cost": 38.708984375,
+            "selected": 44.023193359375
+          },
+          "adapted_sequence/seed43": {
+            "fp": 11.521240234375,
+            "fn": 13.483154296875,
+            "cost": 38.487548828125,
+            "selected": 43.768310546875
+          },
+          "adapted_sequence/seed44": {
+            "fp": 12.280029296875,
+            "fn": 12.91015625,
+            "cost": 38.100341796875,
+            "selected": 45.574462890625
+          },
+          "ppo_sequence/seed42": {
+            "fp": 12.120361328125,
+            "fn": 13.2265625,
+            "cost": 38.573486328125,
+            "selected": 44.874755859375
+          },
+          "ppo_sequence/seed43": {
+            "fp": 12.556396484375,
+            "fn": 12.976806640625,
+            "cost": 38.510009765625,
+            "selected": 45.795166015625
+          },
+          "ppo_sequence/seed44": {
+            "fp": 12.76123046875,
+            "fn": 12.674560546875,
+            "cost": 38.1103515625,
+            "selected": 46.537353515625
+          }
+        },
+        "comparisons": {
+          "teacher_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": 2.5530598958333335,
+              "ci95": [
+                1.9929226806948328,
+                3.1280794719979523
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -1.3355305989583333,
+              "ci95": [
+                -1.6405969968821805,
+                -1.043820509738291
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -0.11800130208333333,
+              "ci95": [
+                -0.4279770724626976,
+                0.18274933293770115
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 4.941324869791666,
+              "ci95": [
+                3.8617036131094027,
+                6.084899187843575
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.29671465258807395
+          },
+          "teacher_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": 0.5047200520833335,
+              "ci95": [
+                -0.6782698553977391,
+                1.5644971066962556
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -4.270589192708333,
+              "ci95": [
+                -4.887102660562376,
+                -3.661895251064336
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -8.036458333333334,
+              "ci95": [
+                -8.81797670965644,
+                -7.298184695531024
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 7.084879557291667,
+              "ci95": [
+                4.896684466651155,
+                9.090698079215954
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 16.85225098850316
+          },
+          "adapted_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -2.627034505208333,
+              "ci95": [
+                -3.041350934334673,
+                -2.1726507431595983
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 0.64501953125,
+              "ci95": [
+                0.40151518799817276,
+                0.8883872164714
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.3369954427083335,
+              "ci95": [
+                -1.5896474311741682,
+                -1.0792646721308616
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -4.635009765625,
+              "ci95": [
+                -5.452123826677229,
+                -3.760613613730593
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 3.3618793292202604
+          },
+          "adapted_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -4.675374348958334,
+              "ci95": [
+                -5.843440699272873,
+                -3.596388084671269
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -2.2900390625,
+              "ci95": [
+                -2.8108172362852772,
+                -1.7422450281935733
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -9.255452473958332,
+              "ci95": [
+                -10.03544521341958,
+                -8.477753656676645
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -2.491455078125,
+              "ci95": [
+                -4.576261060587432,
+                -0.6124245797323525
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 19.408451040722753
+          },
+          "adapted_sequence_vs_teacher_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -5.180094401041667,
+              "ci95": [
+                -5.480357732956952,
+                -4.907141984373725
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 1.9805501302083335,
+              "ci95": [
+                1.8554022670738661,
+                2.126406468637076
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.218994140625,
+              "ci95": [
+                -1.4935626331570844,
+                -0.9559103762340742
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -9.576334635416668,
+              "ci95": [
+                -10.109592026526084,
+                -9.112021613136346
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 3.0742865352448
+          },
+          "ppo_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -1.994547526041667,
+              "ci95": [
+                -2.411677523607534,
+                -1.5255051020544452
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 0.3116048177083333,
+              "ci95": [
+                0.0659476741352793,
+                0.5533433798529014
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.371337890625,
+              "ci95": [
+                -1.6142206983800569,
+                -1.1271559279663603
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -3.3545735677083335,
+              "ci95": [
+                -4.20666463871453,
+                -2.4586140500511084
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 3.4482335246631264
+          },
+          "ppo_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -4.042887369791667,
+              "ci95": [
+                -5.260543894426721,
+                -2.9140696750754005
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -2.6234537760416665,
+              "ci95": [
+                -3.1490226824050906,
+                -2.064342687449512
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -9.289794921875,
+              "ci95": [
+                -10.077755513568775,
+                -8.51991855211377
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -1.2110188802083333,
+              "ci95": [
+                -3.3635635331886187,
+                0.7643923936328819
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 19.480466290207804
+          },
+          "ppo_sequence_vs_adapted_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": 0.6324869791666667,
+              "ci95": [
+                0.579855520739569,
+                0.6821188049032192
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -0.3334147135416667,
+              "ci95": [
+                -0.3645559618604377,
+                -0.3036503592642797
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -0.03434244791666667,
+              "ci95": [
+                -0.08267243094752566,
+                0.013062329605114225
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 1.2804361979166665,
+              "ci95": [
+                1.1777312604960493,
+                1.383234614738388
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.08935831413470044
+          },
+          "ppo_sequence_vs_teacher_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -4.547607421875,
+              "ci95": [
+                -4.862410972047349,
+                -4.2704845188758735
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 1.6471354166666667,
+              "ci95": [
+                1.5350522420182007,
+                1.780696231811806
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.2533365885416665,
+              "ci95": [
+                -1.5003644646193963,
+                -1.0212992832583703
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -8.2958984375,
+              "ci95": [
+                -8.827158076690754,
+                -7.819499485010426
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 3.1608977187599354
+          }
+        },
+        "ppo_selection_changes_vs_adapted": {
+          "seed42": {
+            "fraction_cells_with_changed_selection": 0.623046875,
+            "mean_symmetric_difference": 1.26513671875
+          },
+          "seed43": {
+            "fraction_cells_with_changed_selection": 0.77294921875,
+            "mean_symmetric_difference": 2.22705078125
+          },
+          "seed44": {
+            "fraction_cells_with_changed_selection": 0.793701171875,
+            "mean_symmetric_difference": 1.85791015625
+          }
+        }
+      },
+      "Rep1_to_Rep2": {
+        "n_cells": 4096,
+        "gene_count": 313,
+        "n_seeds_averaged": 3,
+        "primary_cross_section": true,
+        "means": {
+          "original_count_bce": {
+            "fp": 14.070149739583334,
+            "fn": 14.192789713541668,
+            "cost": 42.45572916666667,
+            "selected": 48.22705078125
+          },
+          "spatialex": {
+            "fp": 16.07177734375,
+            "fn": 16.5947265625,
+            "cost": 49.26123046875,
+            "selected": 46.7158203125
+          },
+          "teacher_sequence": {
+            "fp": 16.178955078125,
+            "fn": 12.923746744791668,
+            "cost": 42.026448567708336,
+            "selected": 52.449951171875
+          },
+          "adapted_sequence": {
+            "fp": 11.263427734375,
+            "fn": 15.090901692708334,
+            "cost": 41.445231119791664,
+            "selected": 43.052815755208336
+          },
+          "ppo_sequence": {
+            "fp": 11.853515625,
+            "fn": 14.7568359375,
+            "cost": 41.3671875,
+            "selected": 44.26896158854167
+          }
+        },
+        "per_seed": {
+          "original_count_bce/seed42": {
+            "fp": 14.2958984375,
+            "fn": 14.14794921875,
+            "cost": 42.591796875,
+            "selected": 48.5361328125
+          },
+          "original_count_bce/seed43": {
+            "fp": 14.22216796875,
+            "fn": 14.119384765625,
+            "cost": 42.4609375,
+            "selected": 48.58203125
+          },
+          "original_count_bce/seed44": {
+            "fp": 13.6923828125,
+            "fn": 14.31103515625,
+            "cost": 42.314453125,
+            "selected": 47.56298828125
+          },
+          "spatialex/seed42": {
+            "fp": 16.07177734375,
+            "fn": 16.5947265625,
+            "cost": 49.26123046875,
+            "selected": 46.7158203125
+          },
+          "spatialex/seed43": {
+            "fp": 16.07177734375,
+            "fn": 16.5947265625,
+            "cost": 49.26123046875,
+            "selected": 46.7158203125
+          },
+          "spatialex/seed44": {
+            "fp": 16.07177734375,
+            "fn": 16.5947265625,
+            "cost": 49.26123046875,
+            "selected": 46.7158203125
+          },
+          "teacher_sequence/seed42": {
+            "fp": 16.755615234375,
+            "fn": 12.56201171875,
+            "cost": 41.879638671875,
+            "selected": 53.6923828125
+          },
+          "teacher_sequence/seed43": {
+            "fp": 17.069091796875,
+            "fn": 12.641357421875,
+            "cost": 42.351806640625,
+            "selected": 53.91552734375
+          },
+          "teacher_sequence/seed44": {
+            "fp": 14.712158203125,
+            "fn": 13.56787109375,
+            "cost": 41.847900390625,
+            "selected": 49.741943359375
+          },
+          "adapted_sequence/seed42": {
+            "fp": 11.091064453125,
+            "fn": 15.2333984375,
+            "cost": 41.557861328125,
+            "selected": 42.56640625
+          },
+          "adapted_sequence/seed43": {
+            "fp": 11.358154296875,
+            "fn": 15.111083984375,
+            "cost": 41.580322265625,
+            "selected": 43.12353515625
+          },
+          "adapted_sequence/seed44": {
+            "fp": 11.341064453125,
+            "fn": 14.92822265625,
+            "cost": 41.197509765625,
+            "selected": 43.468505859375
+          },
+          "ppo_sequence/seed42": {
+            "fp": 11.395263671875,
+            "fn": 14.982177734375,
+            "cost": 41.359619140625,
+            "selected": 43.310791015625
+          },
+          "ppo_sequence/seed43": {
+            "fp": 12.425537109375,
+            "fn": 14.570556640625,
+            "cost": 41.566650390625,
+            "selected": 45.252197265625
+          },
+          "ppo_sequence/seed44": {
+            "fp": 11.73974609375,
+            "fn": 14.7177734375,
+            "cost": 41.17529296875,
+            "selected": 44.243896484375
+          }
+        },
+        "comparisons": {
+          "teacher_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": 2.1088053385416665,
+              "ci95": [
+                1.6202343812576399,
+                2.6599794248014623
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -1.26904296875,
+              "ci95": [
+                -1.5224770124446771,
+                -1.0326680249147868
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -0.4292805989583333,
+              "ci95": [
+                -0.8089437991383633,
+                -0.042714192489328284
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 4.222900390625,
+              "ci95": [
+                3.368739385498965,
+                5.158683568371366
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 1.0111252530209218
+          },
+          "teacher_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": 0.107177734375,
+              "ci95": [
+                -2.3510644510192957,
+                2.509984705870591
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -3.670979817708333,
+              "ci95": [
+                -4.928591100730934,
+                -2.3498790672464063
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -7.234781901041666,
+              "ci95": [
+                -8.042502377885052,
+                -6.422418035796682
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 5.734130859375,
+              "ci95": [
+                1.0917364521109187,
+                10.28483045029056
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 14.68656351495567
+          },
+          "adapted_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -2.8067220052083335,
+              "ci95": [
+                -3.263694706057722,
+                -2.363626647464832
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 0.8981119791666667,
+              "ci95": [
+                0.5724683143601401,
+                1.2478299319327644
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.010498046875,
+              "ci95": [
+                -1.469722468709795,
+                -0.48406948662796345
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -5.174235026041667,
+              "ci95": [
+                -6.154924500622519,
+                -4.243533534304235
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 2.3801217567319064
+          },
+          "adapted_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -4.808349609375,
+              "ci95": [
+                -7.053885587142599,
+                -2.612532385832172
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -1.5038248697916667,
+              "ci95": [
+                -2.7314431744229237,
+                -0.23048387682204957
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -7.815999348958334,
+              "ci95": [
+                -8.664034607680371,
+                -6.889130124648735
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -3.663004557291667,
+              "ci95": [
+                -8.040188284747046,
+                0.6517435048291266
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 15.866431419971525
+          },
+          "adapted_sequence_vs_teacher_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -4.91552734375,
+              "ci95": [
+                -5.35797994211036,
+                -4.496631568969947
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 2.167154947916667,
+              "ci95": [
+                1.9695972758781701,
+                2.3905874053715697
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -0.5812174479166665,
+              "ci95": [
+                -1.0549453903870603,
+                -0.09510063264732505
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -9.397135416666668,
+              "ci95": [
+                -10.131078226850232,
+                -8.714704124870657
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 1.382980165407692
+          },
+          "ppo_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -2.216634114583333,
+              "ci95": [
+                -2.6921805412246567,
+                -1.7521819527176123
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 0.5640462239583333,
+              "ci95": [
+                0.251317695714402,
+                0.8965088573751581
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.0885416666666665,
+              "ci95": [
+                -1.522151021842522,
+                -0.611522971743014
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -3.958089192708333,
+              "ci95": [
+                -4.97278527098741,
+                -2.995768626784257
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 2.5639452861436656
+          },
+          "ppo_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -4.21826171875,
+              "ci95": [
+                -6.531560929009614,
+                -1.956716467485665
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -1.8378906249999998,
+              "ci95": [
+                -3.0810343165914253,
+                -0.5653557748024324
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -7.894042968749999,
+              "ci95": [
+                -8.7099647114667,
+                -7.00569996443405
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -2.446858723958333,
+              "ci95": [
+                -6.9036781373027125,
+                1.9435796716985065
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 16.024859496268103
+          },
+          "ppo_sequence_vs_adapted_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": 0.590087890625,
+              "ci95": [
+                0.5180460708255502,
+                0.6598104729116896
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -0.33406575520833337,
+              "ci95": [
+                -0.37591999233717865,
+                -0.29219222554312246
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -0.07804361979166671,
+              "ci95": [
+                -0.16076061624673033,
+                -0.002034866067904426
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 1.2161458333333335,
+              "ci95": [
+                1.0874356452036933,
+                1.3397141054832595
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.18830542786959034
+          },
+          "ppo_sequence_vs_teacher_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -4.325439453125,
+              "ci95": [
+                -4.7530810331600275,
+                -3.9181748335047923
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 1.8330891927083333,
+              "ci95": [
+                1.6513712182254319,
+                2.0389340839953993
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -0.6592610677083333,
+              "ci95": [
+                -1.0902358849831093,
+                -0.23587800580008392
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -8.180989583333332,
+              "ci95": [
+                -8.887631350905933,
+                -7.523307864714898
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 1.5686813665594599
+          }
+        },
+        "ppo_selection_changes_vs_adapted": {
+          "seed42": {
+            "fraction_cells_with_changed_selection": 0.581787109375,
+            "mean_symmetric_difference": 1.127197265625
+          },
+          "seed43": {
+            "fraction_cells_with_changed_selection": 0.783935546875,
+            "mean_symmetric_difference": 2.313720703125
+          },
+          "seed44": {
+            "fraction_cells_with_changed_selection": 0.738525390625,
+            "mean_symmetric_difference": 1.6220703125
+          }
+        }
+      },
+      "Rep2_to_Rep1": {
+        "n_cells": 4096,
+        "gene_count": 313,
+        "n_seeds_averaged": 3,
+        "primary_cross_section": true,
+        "means": {
+          "original_count_bce": {
+            "fp": 13.49853515625,
+            "fn": 14.329996744791666,
+            "cost": 42.15852864583333,
+            "selected": 45.23038736979167
+          },
+          "spatialex": {
+            "fp": 16.563720703125,
+            "fn": 16.4013671875,
+            "cost": 49.366455078125,
+            "selected": 45.6142578125
+          },
+          "teacher_sequence": {
+            "fp": 15.801432291666668,
+            "fn": 12.549641927083334,
+            "cost": 40.900716145833336,
+            "selected": 50.614420572916664
+          },
+          "adapted_sequence": {
+            "fp": 9.382080078125,
+            "fn": 15.768636067708332,
+            "cost": 40.91935221354167,
+            "selected": 37.72021484375
+          },
+          "ppo_sequence": {
+            "fp": 9.937744140625,
+            "fn": 15.424967447916666,
+            "cost": 40.787679036458336,
+            "selected": 38.906087239583336
+          }
+        },
+        "per_seed": {
+          "original_count_bce/seed42": {
+            "fp": 12.8466796875,
+            "fn": 14.728515625,
+            "cost": 42.3037109375,
+            "selected": 43.815185546875
+          },
+          "original_count_bce/seed43": {
+            "fp": 13.84326171875,
+            "fn": 14.134033203125,
+            "cost": 42.111328125,
+            "selected": 45.94873046875
+          },
+          "original_count_bce/seed44": {
+            "fp": 13.8056640625,
+            "fn": 14.12744140625,
+            "cost": 42.060546875,
+            "selected": 45.92724609375
+          },
+          "spatialex/seed42": {
+            "fp": 16.563720703125,
+            "fn": 16.4013671875,
+            "cost": 49.366455078125,
+            "selected": 45.6142578125
+          },
+          "spatialex/seed43": {
+            "fp": 16.563720703125,
+            "fn": 16.4013671875,
+            "cost": 49.366455078125,
+            "selected": 45.6142578125
+          },
+          "spatialex/seed44": {
+            "fp": 16.563720703125,
+            "fn": 16.4013671875,
+            "cost": 49.366455078125,
+            "selected": 45.6142578125
+          },
+          "teacher_sequence/seed42": {
+            "fp": 15.73388671875,
+            "fn": 12.4541015625,
+            "cost": 40.64208984375,
+            "selected": 50.686279296875
+          },
+          "teacher_sequence/seed43": {
+            "fp": 16.746826171875,
+            "fn": 12.116455078125,
+            "cost": 40.979736328125,
+            "selected": 52.361328125
+          },
+          "teacher_sequence/seed44": {
+            "fp": 14.923583984375,
+            "fn": 13.078369140625,
+            "cost": 41.080322265625,
+            "selected": 48.795654296875
+          },
+          "adapted_sequence/seed42": {
+            "fp": 9.905029296875,
+            "fn": 15.42138671875,
+            "cost": 40.747802734375,
+            "selected": 38.862060546875
+          },
+          "adapted_sequence/seed43": {
+            "fp": 9.04638671875,
+            "fn": 15.9892578125,
+            "cost": 41.02490234375,
+            "selected": 36.984375
+          },
+          "adapted_sequence/seed44": {
+            "fp": 9.19482421875,
+            "fn": 15.895263671875,
+            "cost": 40.9853515625,
+            "selected": 37.314208984375
+          },
+          "ppo_sequence/seed42": {
+            "fp": 10.732666015625,
+            "fn": 14.917724609375,
+            "cost": 40.568115234375,
+            "selected": 40.617431640625
+          },
+          "ppo_sequence/seed43": {
+            "fp": 9.42236328125,
+            "fn": 15.7666015625,
+            "cost": 40.95556640625,
+            "selected": 37.763427734375
+          },
+          "ppo_sequence/seed44": {
+            "fp": 9.658203125,
+            "fn": 15.590576171875,
+            "cost": 40.83935546875,
+            "selected": 38.33740234375
+          }
+        },
+        "comparisons": {
+          "teacher_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": 2.302897135416667,
+              "ci95": [
+                1.2722658229638304,
+                3.2080134502736466
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -1.7803548177083335,
+              "ci95": [
+                -2.2024783587121863,
+                -1.3287363806278891
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.2578125,
+              "ci95": [
+                -1.7922875258081916,
+                -0.7434867790649768
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 5.384033203125,
+              "ci95": [
+                3.570856181895122,
+                7.017468658153094
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 2.9835303564947986
+          },
+          "teacher_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -0.7622884114583333,
+              "ci95": [
+                -2.205649050211597,
+                0.5346958651436927
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -3.851725260416667,
+              "ci95": [
+                -4.5071485479832605,
+                -3.2559510209983387
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -8.465738932291666,
+              "ci95": [
+                -9.459360800860425,
+                -7.454177815027286
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 5.000162760416666,
+              "ci95": [
+                2.555691039321298,
+                7.313569280456378
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 17.14876816432168
+          },
+          "adapted_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -4.116455078125,
+              "ci95": [
+                -5.005301740858349,
+                -3.3592079889624045
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 1.4386393229166665,
+              "ci95": [
+                1.0850186214939441,
+                1.8049772193131686
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.2391764322916667,
+              "ci95": [
+                -1.6987353061389499,
+                -0.798208465090889
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -7.510172526041667,
+              "ci95": [
+                -8.988774733055921,
+                -6.162457511997047
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 2.939325617129025
+          },
+          "adapted_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -7.181640625,
+              "ci95": [
+                -8.623039231615559,
+                -5.866842227782984
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -0.6327311197916667,
+              "ci95": [
+                -1.2016352436115374,
+                -0.09077929409021618
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -8.447102864583332,
+              "ci95": [
+                -9.459853789911465,
+                -7.440962903259843
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -7.894042968750001,
+              "ci95": [
+                -10.223433247285277,
+                -5.69431174630196
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 17.111017696562058
+          },
+          "adapted_sequence_vs_teacher_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -6.419352213541666,
+              "ci95": [
+                -6.726118236681768,
+                -6.1113644472122
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 3.218994140625,
+              "ci95": [
+                3.047211182044553,
+                3.4022579115627836
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": 0.018636067708333343,
+              "ci95": [
+                -0.42513687883570805,
+                0.43882345195188494
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -12.894205729166668,
+              "ci95": [
+                -13.386018395030845,
+                -12.396656620009695
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": -0.04556415990832035
+          },
+          "ppo_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -3.560791015625,
+              "ci95": [
+                -4.440827150965099,
+                -2.812015070599063
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 1.094970703125,
+              "ci95": [
+                0.7474811905105297,
+                1.459070574710464
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.370849609375,
+              "ci95": [
+                -1.8232409852765017,
+                -0.9454550832779642
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -6.324300130208334,
+              "ci95": [
+                -7.811106101163412,
+                -4.999076411209602
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 3.2516542996347635
+          },
+          "ppo_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -6.6259765625,
+              "ci95": [
+                -8.082186713047513,
+                -5.267733210198237
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -0.9763997395833334,
+              "ci95": [
+                -1.5545132740950491,
+                -0.44530925919534353
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -8.578776041666668,
+              "ci95": [
+                -9.570980671369245,
+                -7.563267417984064
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -6.708170572916666,
+              "ci95": [
+                -9.037489221262874,
+                -4.41772008433183
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 17.37774370894224
+          },
+          "ppo_sequence_vs_adapted_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": 0.5556640625,
+              "ci95": [
+                0.5061595625086613,
+                0.6082438301379333
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -0.3436686197916667,
+              "ci95": [
+                -0.3691777363543401,
+                -0.3188926078652837
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -0.13167317708333326,
+              "ci95": [
+                -0.16694877033416708,
+                -0.09462232568429445
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 1.1858723958333335,
+              "ci95": [
+                1.0895489769826816,
+                1.2819633476914938
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.3217870517504438
+          },
+          "ppo_sequence_vs_teacher_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -5.863688151041666,
+              "ci95": [
+                -6.184512998921506,
+                -5.5451272419251065
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 2.875325520833333,
+              "ci95": [
+                2.7088670454659374,
+                3.0534344742659347
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -0.11303710937499994,
+              "ci95": [
+                -0.5274723552151868,
+                0.28292884466819385
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -11.708333333333332,
+              "ci95": [
+                -12.227929137836504,
+                -11.176958958419887
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.2763695114089473
+          }
+        },
+        "ppo_selection_changes_vs_adapted": {
+          "seed42": {
+            "fraction_cells_with_changed_selection": 0.735107421875,
+            "mean_symmetric_difference": 1.9140625
+          },
+          "seed43": {
+            "fraction_cells_with_changed_selection": 0.60302734375,
+            "mean_symmetric_difference": 1.188232421875
+          },
+          "seed44": {
+            "fraction_cells_with_changed_selection": 0.7724609375,
+            "mean_symmetric_difference": 1.699462890625
+          }
+        }
+      },
+      "Rep2_to_Rep2": {
+        "n_cells": 4096,
+        "gene_count": 313,
+        "n_seeds_averaged": 3,
+        "primary_cross_section": false,
+        "means": {
+          "original_count_bce": {
+            "fp": 15.132080078124998,
+            "fn": 13.381184895833332,
+            "cost": 41.894449869791664,
+            "selected": 50.33072916666667
+          },
+          "spatialex": {
+            "fp": 16.7041015625,
+            "fn": 16.355712890625,
+            "cost": 49.41552734375,
+            "selected": 47.572509765625
+          },
+          "teacher_sequence": {
+            "fp": 17.684814453125,
+            "fn": 11.913411458333332,
+            "cost": 41.51163736979167,
+            "selected": 55.638427734375
+          },
+          "adapted_sequence": {
+            "fp": 11.77197265625,
+            "fn": 14.21435546875,
+            "cost": 40.20068359375,
+            "selected": 44.77058919270833
+          },
+          "ppo_sequence": {
+            "fp": 12.361653645833334,
+            "fn": 13.896402994791668,
+            "cost": 40.15445963541667,
+            "selected": 45.966064453125
+          }
+        },
+        "per_seed": {
+          "original_count_bce/seed42": {
+            "fp": 14.73291015625,
+            "fn": 13.5712890625,
+            "cost": 41.87548828125,
+            "selected": 49.53955078125
+          },
+          "original_count_bce/seed43": {
+            "fp": 15.13916015625,
+            "fn": 13.38427734375,
+            "cost": 41.90771484375,
+            "selected": 50.292724609375
+          },
+          "original_count_bce/seed44": {
+            "fp": 15.524169921875,
+            "fn": 13.18798828125,
+            "cost": 41.900146484375,
+            "selected": 51.159912109375
+          },
+          "spatialex/seed42": {
+            "fp": 16.7041015625,
+            "fn": 16.355712890625,
+            "cost": 49.41552734375,
+            "selected": 47.572509765625
+          },
+          "spatialex/seed43": {
+            "fp": 16.7041015625,
+            "fn": 16.355712890625,
+            "cost": 49.41552734375,
+            "selected": 47.572509765625
+          },
+          "spatialex/seed44": {
+            "fp": 16.7041015625,
+            "fn": 16.355712890625,
+            "cost": 49.41552734375,
+            "selected": 47.572509765625
+          },
+          "teacher_sequence/seed42": {
+            "fp": 18.15673828125,
+            "fn": 11.698486328125,
+            "cost": 41.5537109375,
+            "selected": 56.569091796875
+          },
+          "teacher_sequence/seed43": {
+            "fp": 18.45068359375,
+            "fn": 11.603515625,
+            "cost": 41.65771484375,
+            "selected": 57.011962890625
+          },
+          "teacher_sequence/seed44": {
+            "fp": 16.447021484375,
+            "fn": 12.438232421875,
+            "cost": 41.323486328125,
+            "selected": 53.334228515625
+          },
+          "adapted_sequence/seed42": {
+            "fp": 11.7705078125,
+            "fn": 14.151611328125,
+            "cost": 40.07373046875,
+            "selected": 44.822509765625
+          },
+          "adapted_sequence/seed43": {
+            "fp": 11.78515625,
+            "fn": 14.267333984375,
+            "cost": 40.31982421875,
+            "selected": 44.76611328125
+          },
+          "adapted_sequence/seed44": {
+            "fp": 11.76025390625,
+            "fn": 14.22412109375,
+            "cost": 40.20849609375,
+            "selected": 44.72314453125
+          },
+          "ppo_sequence/seed42": {
+            "fp": 12.604248046875,
+            "fn": 13.72216796875,
+            "cost": 40.048583984375,
+            "selected": 46.476318359375
+          },
+          "ppo_sequence/seed43": {
+            "fp": 12.216796875,
+            "fn": 14.0263671875,
+            "cost": 40.26953125,
+            "selected": 45.63232421875
+          },
+          "ppo_sequence/seed44": {
+            "fp": 12.263916015625,
+            "fn": 13.940673828125,
+            "cost": 40.145263671875,
+            "selected": 45.78955078125
+          }
+        },
+        "comparisons": {
+          "teacher_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": 2.552734375,
+              "ci95": [
+                0.5786872566602675,
+                4.093969221929458
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -1.4677734375,
+              "ci95": [
+                -2.09114708779466,
+                -0.6860605402979947
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -0.3828125,
+              "ci95": [
+                -0.9438215231773227,
+                0.1573798344090894
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 5.307698567708334,
+              "ci95": [
+                1.9885180283939539,
+                7.968996738903222
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.9137546887231547
+          },
+          "teacher_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": 0.9807128906250001,
+              "ci95": [
+                -0.7983973099235547,
+                2.6492257355303797
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -4.442301432291667,
+              "ci95": [
+                -5.34837676559801,
+                -3.4989201328406603
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -7.903889973958333,
+              "ci95": [
+                -8.704262069648431,
+                -7.160075292262411
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 8.06591796875,
+              "ci95": [
+                4.692957720751381,
+                11.290518128408428
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 15.994749826256786
+          },
+          "adapted_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -3.360107421875,
+              "ci95": [
+                -4.968222407711586,
+                -2.115828792077399
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 0.8331705729166666,
+              "ci95": [
+                0.16195323529560599,
+                1.641970528905334
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.6937662760416667,
+              "ci95": [
+                -1.999321503208362,
+                -1.3651301884182567
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -5.560139973958334,
+              "ci95": [
+                -8.458042915282276,
+                -3.2689932297402016
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 4.042937146342548
+          },
+          "adapted_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -4.93212890625,
+              "ci95": [
+                -6.61597283512629,
+                -3.290972850905919
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -2.141357421875,
+              "ci95": [
+                -3.0599684504914935,
+                -1.1839207634070654
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -9.21484375,
+              "ci95": [
+                -9.896206225210117,
+                -8.568166540872529
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -2.8019205729166674,
+              "ci95": [
+                -6.084319747013499,
+                0.42547718829757764
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 18.647668547375076
+          },
+          "adapted_sequence_vs_teacher_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -5.912841796875,
+              "ci95": [
+                -6.3261453185897745,
+                -5.476741333144153
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 2.3009440104166665,
+              "ci95": [
+                2.1360238912667775,
+                2.485155532827385
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.3109537760416665,
+              "ci95": [
+                -1.8662977676882326,
+                -0.729920748758465
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -10.867838541666668,
+              "ci95": [
+                -11.444808004452213,
+                -10.267062198173495
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 3.158039188778572
+          },
+          "ppo_sequence_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -2.7704264322916665,
+              "ci95": [
+                -4.341556734834032,
+                -1.553761521977635
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 0.5152180989583334,
+              "ci95": [
+                -0.10867701037779995,
+                1.2727956835518235
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.7399902343749998,
+              "ci95": [
+                -2.0217839769877117,
+                -1.4425128633919329
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -4.364664713541666,
+              "ci95": [
+                -7.1471537668574125,
+                -2.1456652642827088
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 4.153271471001287
+          },
+          "ppo_sequence_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -4.342447916666667,
+              "ci95": [
+                -6.030816220710388,
+                -2.690091113401257
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -2.4593098958333335,
+              "ci95": [
+                -3.359503829360809,
+                -1.540034003980446
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -9.261067708333332,
+              "ci95": [
+                -9.94556396542016,
+                -8.626682390693944
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -1.6064453125,
+              "ci95": [
+                -4.887431386842456,
+                1.6163815587479515
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 18.741209911432126
+          },
+          "ppo_sequence_vs_adapted_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": 0.5896809895833334,
+              "ci95": [
+                0.5077261670258679,
+                0.660569095386309
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -0.31795247395833337,
+              "ci95": [
+                -0.37482800850239817,
+                -0.26203620557403207
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -0.0462239583333333,
+              "ci95": [
+                -0.12153892273313208,
+                0.020592449048318442
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": 1.1954752604166667,
+              "ci95": [
+                1.0410569562657246,
+                1.3395074087597993
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.11498301571298414
+          },
+          "ppo_sequence_vs_teacher_sequence": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -5.323160807291666,
+              "ci95": [
+                -5.800277271981559,
+                -4.844713854786223
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 1.9829915364583335,
+              "ci95": [
+                1.8435654373511183,
+                2.13698291009798
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.357177734375,
+              "ci95": [
+                -1.8696542467297752,
+                -0.8314718683728729
+              ],
+              "n_valid_cells": 4096
+            },
+            "selected": {
+              "mean": -9.67236328125,
+              "ci95": [
+                -10.330089124327017,
+                -8.984104474057665
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 3.269390995794901
+          }
+        },
+        "ppo_selection_changes_vs_adapted": {
+          "seed42": {
+            "fraction_cells_with_changed_selection": 0.748046875,
+            "mean_symmetric_difference": 1.87158203125
+          },
+          "seed43": {
+            "fraction_cells_with_changed_selection": 0.6611328125,
+            "mean_symmetric_difference": 1.37158203125
+          },
+          "seed44": {
+            "fraction_cells_with_changed_selection": 0.817626953125,
+            "mean_symmetric_difference": 1.87744140625
+          }
+        }
+      }
+    },
+    "method_labels": {
+      "original_count_bce": "原 STRank 扩展 count+BCE（源重校准）",
+      "spatialex": "SpatialEx（源校准）",
+      "teacher_sequence": "真实历史预训练模型，预测计数递推",
+      "adapted_sequence": "预测历史适配后，固定选择规则",
+      "ppo_sequence": "预测历史适配后，PPO 序列策略"
+    },
+    "main_objective_gate": {
+      "assessed": true,
+      "passed": true,
+      "comparison": "ppo_sequence_vs_original_count_bce",
+      "checks": {
+        "Rep1_to_Rep2": {
+          "mean": -1.0885416666666665,
+          "ci95": [
+            -1.522151021842522,
+            -0.611522971743014
+          ],
+          "upper_ci_below_zero": true
+        },
+        "Rep2_to_Rep1": {
+          "mean": -1.370849609375,
+          "ci95": [
+            -1.8232409852765017,
+            -0.9454550832779642
+          ],
+          "upper_ci_below_zero": true
+        }
+      },
+      "exploratory_only": true,
+      "criterion": "both full cross-section directions: paired cost difference upper95%CI < 0"
+    },
+    "spatialex_comparison_gate": {
+      "assessed": true,
+      "passed": true,
+      "comparison": "ppo_sequence_vs_spatialex",
+      "checks": {
+        "Rep1_to_Rep2": {
+          "mean": -7.894042968749999,
+          "ci95": [
+            -8.7099647114667,
+            -7.00569996443405
+          ],
+          "upper_ci_below_zero": true
+        },
+        "Rep2_to_Rep1": {
+          "mean": -8.578776041666668,
+          "ci95": [
+            -9.570980671369245,
+            -7.563267417984064
+          ],
+          "upper_ci_below_zero": true
+        }
+      },
+      "exploratory_only": true,
+      "criterion": "both full cross-section directions: paired cost difference upper95%CI < 0"
+    },
+    "rl_increment_gate": {
+      "assessed": true,
+      "passed": true,
+      "comparison": "ppo_sequence_vs_adapted_sequence",
+      "checks": {
+        "Rep1_to_Rep2": {
+          "mean": -0.07804361979166671,
+          "ci95": [
+            -0.16076061624673033,
+            -0.002034866067904426
+          ],
+          "upper_ci_below_zero": true
+        },
+        "Rep2_to_Rep1": {
+          "mean": -0.13167317708333326,
+          "ci95": [
+            -0.16694877033416708,
+            -0.09462232568429445
+          ],
+          "upper_ci_below_zero": true
+        }
+      },
+      "exploratory_only": true,
+      "criterion": "both full cross-section directions: paired cost difference upper95%CI < 0"
+    },
+    "checkpoint_audit": {
+      "available": true,
+      "runs": {
+        "Rep1/seed42/ppo": {
+          "best_iteration": 4,
+          "initial_retained": false
+        },
+        "Rep1/seed43/ppo": {
+          "best_iteration": 4,
+          "initial_retained": false
+        },
+        "Rep1/seed44/ppo": {
+          "best_iteration": 1,
+          "initial_retained": false
+        },
+        "Rep2/seed42/ppo": {
+          "best_iteration": 4,
+          "initial_retained": false
+        },
+        "Rep2/seed43/ppo": {
+          "best_iteration": 6,
+          "initial_retained": false
+        },
+        "Rep2/seed44/ppo": {
+          "best_iteration": 1,
+          "initial_retained": false
+        }
+      },
+      "initial_checkpoint_runs": 0,
+      "interpretation": "retaining iteration0 does not establish a PPO learning contribution"
+    },
+    "uncertainty": "per-cell mean across training seeds, then paired spatial-block bootstrap",
+    "cost_scope": "all313 genes; every committed selection included; raw1 neutral",
+    "inference_information": "H&E, image neighbors, positions, selected identities, predicted count history; no measured RNA or reward inputs",
+    "baseline_notes": {
+      "original_count_bce": "frozen raw>0 trained model, source recalibrated for current raw1-neutral FP+2FN; same-section test was old validation",
+      "spatialex": "frozen seed42 predictor reused across seed rows, not three independent SpatialEx fits"
+    },
+    "exploratory_same_specimen": true,
+    "test_driven_model_or_threshold_selection": false
+  },
+  "teacher_one_shot": {
+    "method": "context_static",
+    "description": "Pretrained H&E plus neighbor predictor with empty history; select all genes with utility > 0.",
+    "source_report": "experiments/predicted_count_inference_20261030/artifacts_full/comparison.json",
+    "directions": {
+      "Rep1_to_Rep2": {
+        "means": {
+          "fp": 11.11279296875,
+          "fn": 14.950846354166668,
+          "cost": 41.014485677083336
+        },
+        "comparisons": {
+          "context_static_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -4.958984375,
+              "ci95": [
+                -7.1420729333071575,
+                -2.82726568373068
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -1.6438802083333335,
+              "ci95": [
+                -2.8235259083104345,
+                -0.4037921256404968
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -8.246744791666666,
+              "ci95": [
+                -9.043204751939301,
+                -7.404808054136929
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 16.740842064223663
+          },
+          "context_static_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -2.9573567708333335,
+              "ci95": [
+                -3.3820798870167956,
+                -2.5278374199442037
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 0.758056640625,
+              "ci95": [
+                0.5013589790518758,
+                1.0068655147076133
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.4412434895833335,
+              "ci95": [
+                -1.7912956277362355,
+                -1.0338255657950044
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 3.39469729497639
+          }
+        }
+      },
+      "Rep2_to_Rep1": {
+        "means": {
+          "fp": 9.542399088541668,
+          "fn": 15.523518880208334,
+          "cost": 40.58943684895833
+        },
+        "comparisons": {
+          "context_static_vs_spatialex": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -7.021321614583334,
+              "ci95": [
+                -8.476654987949576,
+                -5.75277422061168
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": -0.8778483072916667,
+              "ci95": [
+                -1.4497801739977316,
+                -0.3647524592792229
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -8.777018229166668,
+              "ci95": [
+                -9.839948947644965,
+                -7.70038147743991
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 17.779316370350234
+          },
+          "context_static_vs_original_count_bce": {
+            "n_cells": 4096,
+            "n_blocks": 36,
+            "bootstrap_replicates": 2000,
+            "direction": "candidate minus reference; lower ce/bce/brier/log_mse/fp/fn/cost is better",
+            "fp": {
+              "mean": -3.9561360677083335,
+              "ci95": [
+                -4.858438267533207,
+                -3.2293730023840874
+              ],
+              "n_valid_cells": 4096
+            },
+            "fn": {
+              "mean": 1.1935221354166667,
+              "ci95": [
+                0.8514309957141323,
+                1.5899233605746643
+              ],
+              "n_valid_cells": 4096
+            },
+            "cost": {
+              "mean": -1.569091796875,
+              "ci95": [
+                -2.0916224111634265,
+                -1.1146764427000817
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 3.721884627560594
+          }
+        }
+      }
+    }
+  },
+  "interpretation": [
+    "These are archived results, not a new evaluation of the reorganized package.",
+    "Primary cross-section evaluations use two sections of the same specimen and previously examined tests.",
+    "Spatial block intervals do not establish independent-patient generalization.",
+    "FP+2FN uses raw0 as negative, raw>=2 as positive and raw1 as neutral.",
+    "The historical teacher one-shot costs are lower than the PPO costs in both primary cross-section directions.",
+    "PPO versus the same adapted predictor is the reported incremental RL comparison; complete-system baseline differences are not all attributable to PPO."
+  ]
+}

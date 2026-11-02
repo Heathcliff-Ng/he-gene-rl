@@ -1,0 +1,27 @@
+{
+  "format": "he-gene-rl-data-v1",
+  "sections": {
+    "Rep1": {
+      "features": "Rep1/features.npy",
+      "metadata": "Rep1/metadata.npz",
+      "splits": {
+        "train": "Rep1/train.npz",
+        "policy": "Rep1/policy.npz",
+        "monitor": "Rep1/monitor.npz",
+        "calibration": "Rep1/calibration.npz",
+        "test": "Rep1/test.npz"
+      }
+    },
+    "Rep2": {
+      "features": "Rep2/features.npy",
+      "metadata": "Rep2/metadata.npz",
+      "splits": {
+        "train": "Rep2/train.npz",
+        "policy": "Rep2/policy.npz",
+        "monitor": "Rep2/monitor.npz",
+        "calibration": "Rep2/calibration.npz",
+        "test": "Rep2/test.npz"
+      }
+    }
+  }
+}
