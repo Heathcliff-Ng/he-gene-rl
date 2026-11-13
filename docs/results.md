@@ -1,12 +1,36 @@
-# Historical results
+# Results and reproduction
 
-These are results from the original experimental workspace, completed on 2026-11-01. They were not produced by running the standalone package in this repository. The packaging step has not executed tests, training, or inference; a later parity check must establish that the reorganized code reproduces the old outputs.
+The original experiments completed on 2026-11-01. On 2026-11-13, this standalone package completed fresh training and test-set evaluation and reproduced the comparable historical metrics exactly. The two runs are recorded separately below.
 
 ## Evaluation definition
 
-The endpoint is the final gene set over all 313 genes. A true count of zero is negative, at least two is positive, and one is neutral. Cost is the mean per-cell `FP + 2 FN`, with lower values preferred. Each direction uses 4,096 held-out cells. The new models and original count+BCE baseline are averaged over seeds 42, 43, and 44. SpatialEx is one existing frozen model with source-calibrated decisions; repeating its scores in seed-aligned comparisons does not constitute three independent SpatialEx fits.
+The endpoint is the final gene set over all 313 genes. A true count of zero is negative, at least two is positive, and one is neutral. Cost is the mean per-cell `FP + 2 FN`, with lower values preferred. Each direction uses 4,096 held-out cells. HE-Gene-RL models and the historical count+BCE baseline are averaged over seeds 42, 43, and 44. SpatialEx is one existing frozen model with source-calibrated decisions; repeating its scores in seed-aligned comparisons does not constitute three independent SpatialEx fits.
 
-## Cross-section results
+## Standalone reproduction: 2026-11-13
+
+Run `reproduction_20261113` used the package's own data preparation, training, and evaluation code. Data preparation read raw counts, UNI features, image coordinates, and identities from the external Rank datasets, using the historical `*_full_with_spatialex_all_pred.h5ad` filenames without reading prediction layers. It rebuilt the historical partitions without loading old output caches or importing original Rank modules. All three training stages ran from scratch for Rep1 and Rep2 with seeds 42, 43, and 44, producing six trained predictor/policy pairs.
+
+Evaluation covered all four source-to-target directions and all five internal methods, producing 60 prediction archives. Each direction contained 4,096 test cells and 313 genes. All requested predictions finished before the evaluation command loaded test counts for scoring.
+
+The three sequence methods shared with the historical report (`teacher_sequence`, `adapted_sequence`, and `ppo_sequence`) matched on **192 numeric metrics, with a maximum absolute difference of 0**. This comparison includes FP, FN, cost, and selected-gene count for all four directions: 48 seed-averaged metrics and 144 per-seed metrics. This establishes equality of those recorded evaluation metrics; it is not a claim that checkpoint files or every prediction array were compared byte for byte.
+
+The new cross-section costs are:
+
+| Method | Rep1 → Rep2 | Rep2 → Rep1 |
+|---|---:|---:|
+| Pretrained predictor, predicted-count sequence (`teacher_sequence`) | 42.026449 | 40.900716 |
+| Adapted predictor, fixed selection rule (`adapted_sequence`) | 41.445231 | 40.919352 |
+| Adapted predictor + PPO (`ppo_sequence`) | 41.367188 | 40.787679 |
+| Pretrained predictor, one-shot selection (`teacher_one_shot`) | **41.014486** | **40.589437** |
+| Adapted predictor, one-shot selection (`adapted_one_shot`) | 41.277262 | 40.709554 |
+
+PPO reduced cost relative to the adapted fixed-rule sequence by 0.1883% and 0.3218%. The corresponding 95% spatial-block intervals for the cost difference were [-0.160761, -0.002035] and [-0.166949, -0.094622]. The increment is small. Both one-shot variants had lower mean cross-section costs than PPO; the pretrained one-shot variant was best in both directions. These results do not establish an advantage of sequential reinforcement learning over one-shot prediction.
+
+The compact record is [reports/reproduction_20261113.json](../reports/reproduction_20261113.json). Full local artifacts are in `runs/reproduction_20261113/` and `results/reproduction_20261113/`; they remain excluded from the source repository. Reproduction instructions are in [docs/reproduction.md](reproduction.md).
+
+SpatialEx and original STRank were not retrained or reevaluated in this run. Their numbers below remain historical references. This run reused the same specimen and test partitions, so it validates reproduction on those data rather than generalization to new patients.
+
+## Historical cross-section results
 
 | Method | Rep1 → Rep2 FP | FN | Cost | Rep2 → Rep1 FP | FN | Cost |
 |---|---:|---:|---:|---:|---:|---:|
@@ -21,7 +45,7 @@ The endpoint is the final gene set over all 313 genes. A true count of zero is n
 
 The complete PPO system reduced cost relative to SpatialEx by **16.02%** and **17.38%**, and relative to the original count+BCE baseline by **2.56%** and **3.25%**. These are reductions in the specified cost, not percentage-point gains in prediction accuracy. Relative to the original baseline, FP decreased while FN increased.
 
-## PPO increment on a fixed predictor
+## Historical PPO increment on a fixed predictor
 
 The matched comparison holds the adapted predictor fixed and changes only the selection/stopping policy:
 
@@ -32,7 +56,7 @@ The matched comparison holds the adapted predictor fixed and changes only the se
 
 All six cross-section seed comparisons improved, and all six selected PPO checkpoints were later than iteration zero. The measured increment is small, and most improvement over the original count+BCE baseline was already present in the adapted predictor. The one-shot pretrained control in the preceding table has a lower cost than the final PPO system in both directions. These results do not establish a general advantage of sequential inference over one-shot prediction.
 
-## Same-section supplementary results
+## Historical same-section supplementary results
 
 | Method | Rep1 → Rep1 cost | Rep2 → Rep2 cost |
 |---|---:|---:|

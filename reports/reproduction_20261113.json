@@ -1,0 +1,724 @@
+{
+  "format": "he-gene-rl-reproduction-v1",
+  "date": "2026-11-13",
+  "status": "completed",
+  "origin": "Standalone training from scratch and test-set evaluation executed by the user in the HERL Conda environment.",
+  "run": {
+    "directory": "runs/reproduction_20261113",
+    "origin": "standalone-training",
+    "complete": true,
+    "sources": [
+      "Rep1",
+      "Rep2"
+    ],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "stages": [
+      "pretraining",
+      "adaptation",
+      "ppo"
+    ],
+    "training_combinations": 6,
+    "device": "cuda",
+    "config": "configs/default.json",
+    "recorded_source_sha256": {
+      "__init__.py": "6dd873764718b018349281ac4597d4d0ddcb0a6d864927c358e416404b92b7ea",
+      "__main__.py": "19f07de3d1765a6803d4332ab1e67346381236f7769f47640e73849922394790",
+      "adaptation.py": "67ce09478d684b8cc28acb822912735473a45e0f0bbaac69a9839503235cf992",
+      "cli.py": "d8d447cf061cc9ef9a744050bb1aa4964661c9edb1096c9ebf6feaa0e8d6cce7",
+      "core.py": "a8d2219ab62743357faa373385b436b33d6a3034206a58a1f4fbf4646c9e9a95",
+      "data.py": "9433c8712084e452a533d989b77737322bcdeceb4a4466d08a98e0e2ef7d3ab3",
+      "evaluation.py": "5ffd40d042ec1b0c7b01a2c2d996c46d41b6c85fca2ee449300a8b303268a891",
+      "information.py": "feac050ba2ddbcf039991a389467e0d4313056b82a44a29eacf1200eee3f9980",
+      "io.py": "8e4649fe9c2738c6ceeafcb6aa81c67abd7cdb9b6a643483c1ed5626435084aa",
+      "model.py": "b72108daa0416b97f392f37fa08a3f8925af3b726b75ce34dd89aef5028d4806",
+      "ppo.py": "acd0b0ae087b52fb1bf013c7900305276fd1973a21ecc664a9e7e0694d12baae",
+      "preparation.py": "15938c3bec71017af6e2fa1a09a3dc80d6e560143477c3b0ecce0cfdb4ea5af6",
+      "pretraining.py": "36b50507d7434545f78b5eae9039309005617e8f5ae690c199506440fe83f0a4",
+      "workflow.py": "ac3b27b3441873515d1002e2ef231621cb678ef2265d0bf53156d33009809473"
+    }
+  },
+  "data": {
+    "source_directory": "../datasets",
+    "source_variant": "with-spatialex",
+    "old_outputs_read": false,
+    "old_modules_imported": false,
+    "prediction_layers_read": false,
+    "source_files_modified": false,
+    "sources": {
+      "Rep1": {
+        "sha256": "e43e21fd001e6a20be38c53d832f6389ca1f07a9369c5bffd212b680f1b24327",
+        "n_cells": 164000,
+        "n_genes": 313,
+        "feature_dim": 1024,
+        "split_recipe": {
+          "axis": 0,
+          "validation_fraction": 0.2,
+          "buffer_pixels": 64,
+          "cutoff": 22179,
+          "seed": 42,
+          "previous_held_cells_excluded": 6144,
+          "original_train_cells": 130921,
+          "original_validation_cells": 32547,
+          "cohort_sizes": {
+            "train": 65536,
+            "monitor": 1024,
+            "calibration": 1024,
+            "test": 4096,
+            "policy": 8192
+          },
+          "labels_used_to_partition": false
+        }
+      },
+      "Rep2": {
+        "sha256": "b26c2f7344314135a61a2c1bdf5021474794ebb01c43f5962b0413476665d346",
+        "n_cells": 111555,
+        "n_genes": 313,
+        "feature_dim": 1024,
+        "split_recipe": {
+          "axis": 0,
+          "validation_fraction": 0.2,
+          "buffer_pixels": 64,
+          "cutoff": 21464,
+          "seed": 42,
+          "previous_held_cells_excluded": 6144,
+          "original_train_cells": 89055,
+          "original_validation_cells": 22129,
+          "cohort_sizes": {
+            "train": 65536,
+            "monitor": 1024,
+            "calibration": 1024,
+            "test": 4096,
+            "policy": 8192
+          },
+          "labels_used_to_partition": false
+        }
+      }
+    }
+  },
+  "evaluation": {
+    "directory": "results/reproduction_20261113",
+    "split": "test",
+    "methods": [
+      "teacher_sequence",
+      "adapted_sequence",
+      "ppo_sequence",
+      "teacher_one_shot",
+      "adapted_one_shot"
+    ],
+    "prediction_count": 60,
+    "test_labels_used_during_training": false,
+    "all_predictions_finished_before_test_labels": true,
+    "cost": "Mean per-cell FP + 2 FN; raw count 0 negative, 1 neutral, >=2 positive; lower is better.",
+    "directions": {
+      "Rep1_to_Rep1": {
+        "n_cells": 4096,
+        "gene_count": 313,
+        "n_seeds": 3,
+        "cross_section": false,
+        "means": {
+          "teacher_sequence": {
+            "fp": 17.026936848958332,
+            "fn": 11.312174479166666,
+            "cost": 39.651285807291664,
+            "selected": 54.031656901041664
+          },
+          "adapted_sequence": {
+            "fp": 11.846842447916668,
+            "fn": 13.292724609375,
+            "cost": 38.432291666666664,
+            "selected": 44.455322265625
+          },
+          "ppo_sequence": {
+            "fp": 12.479329427083334,
+            "fn": 12.959309895833334,
+            "cost": 38.39794921875,
+            "selected": 45.73575846354167
+          },
+          "teacher_one_shot": {
+            "fp": 11.964192708333332,
+            "fn": 13.1083984375,
+            "cost": 38.18098958333333,
+            "selected": 44.888753255208336
+          },
+          "adapted_one_shot": {
+            "fp": 12.01171875,
+            "fn": 13.059488932291668,
+            "cost": 38.130696614583336,
+            "selected": 45.03694661458333
+          }
+        },
+        "comparable_per_seed": {
+          "teacher_sequence/seed42": {
+            "fp": 17.5615234375,
+            "fn": 11.0234375,
+            "cost": 39.6083984375,
+            "selected": 55.17919921875
+          },
+          "teacher_sequence/seed43": {
+            "fp": 17.72705078125,
+            "fn": 11.1044921875,
+            "cost": 39.93603515625,
+            "selected": 55.17724609375
+          },
+          "teacher_sequence/seed44": {
+            "fp": 15.792236328125,
+            "fn": 11.80859375,
+            "cost": 39.409423828125,
+            "selected": 51.738525390625
+          },
+          "adapted_sequence/seed42": {
+            "fp": 11.7392578125,
+            "fn": 13.48486328125,
+            "cost": 38.708984375,
+            "selected": 44.023193359375
+          },
+          "adapted_sequence/seed43": {
+            "fp": 11.521240234375,
+            "fn": 13.483154296875,
+            "cost": 38.487548828125,
+            "selected": 43.768310546875
+          },
+          "adapted_sequence/seed44": {
+            "fp": 12.280029296875,
+            "fn": 12.91015625,
+            "cost": 38.100341796875,
+            "selected": 45.574462890625
+          },
+          "ppo_sequence/seed42": {
+            "fp": 12.120361328125,
+            "fn": 13.2265625,
+            "cost": 38.573486328125,
+            "selected": 44.874755859375
+          },
+          "ppo_sequence/seed43": {
+            "fp": 12.556396484375,
+            "fn": 12.976806640625,
+            "cost": 38.510009765625,
+            "selected": 45.795166015625
+          },
+          "ppo_sequence/seed44": {
+            "fp": 12.76123046875,
+            "fn": 12.674560546875,
+            "cost": 38.1103515625,
+            "selected": 46.537353515625
+          }
+        },
+        "ppo_cost_comparisons": {
+          "ppo_sequence_vs_teacher_sequence": {
+            "cost": {
+              "mean": -1.2533365885416665,
+              "ci95": [
+                -1.5003644646193963,
+                -1.0212992832583703
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 3.1608977187599354
+          },
+          "ppo_sequence_vs_adapted_sequence": {
+            "cost": {
+              "mean": -0.03434244791666667,
+              "ci95": [
+                -0.08267243094752566,
+                0.013062329605114225
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.08935831413470044
+          },
+          "ppo_sequence_vs_teacher_one_shot": {
+            "cost": {
+              "mean": 0.21695963541666674,
+              "ci95": [
+                0.11918124732724587,
+                0.32364862739593486
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": -0.56823994816357
+          },
+          "ppo_sequence_vs_adapted_one_shot": {
+            "cost": {
+              "mean": 0.26725260416666663,
+              "ci95": [
+                0.18108209155677774,
+                0.3468839872943723
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": -0.7008857112367881
+          }
+        }
+      },
+      "Rep1_to_Rep2": {
+        "n_cells": 4096,
+        "gene_count": 313,
+        "n_seeds": 3,
+        "cross_section": true,
+        "means": {
+          "teacher_sequence": {
+            "fp": 16.178955078125,
+            "fn": 12.923746744791668,
+            "cost": 42.026448567708336,
+            "selected": 52.449951171875
+          },
+          "adapted_sequence": {
+            "fp": 11.263427734375,
+            "fn": 15.090901692708334,
+            "cost": 41.445231119791664,
+            "selected": 43.052815755208336
+          },
+          "ppo_sequence": {
+            "fp": 11.853515625,
+            "fn": 14.7568359375,
+            "cost": 41.3671875,
+            "selected": 44.26896158854167
+          },
+          "teacher_one_shot": {
+            "fp": 11.11279296875,
+            "fn": 14.950846354166668,
+            "cost": 41.014485677083336,
+            "selected": 43.00651041666667
+          },
+          "adapted_one_shot": {
+            "fp": 11.426350911458332,
+            "fn": 14.925455729166668,
+            "cost": 41.277262369791664,
+            "selected": 43.53361002604167
+          }
+        },
+        "comparable_per_seed": {
+          "teacher_sequence/seed42": {
+            "fp": 16.755615234375,
+            "fn": 12.56201171875,
+            "cost": 41.879638671875,
+            "selected": 53.6923828125
+          },
+          "teacher_sequence/seed43": {
+            "fp": 17.069091796875,
+            "fn": 12.641357421875,
+            "cost": 42.351806640625,
+            "selected": 53.91552734375
+          },
+          "teacher_sequence/seed44": {
+            "fp": 14.712158203125,
+            "fn": 13.56787109375,
+            "cost": 41.847900390625,
+            "selected": 49.741943359375
+          },
+          "adapted_sequence/seed42": {
+            "fp": 11.091064453125,
+            "fn": 15.2333984375,
+            "cost": 41.557861328125,
+            "selected": 42.56640625
+          },
+          "adapted_sequence/seed43": {
+            "fp": 11.358154296875,
+            "fn": 15.111083984375,
+            "cost": 41.580322265625,
+            "selected": 43.12353515625
+          },
+          "adapted_sequence/seed44": {
+            "fp": 11.341064453125,
+            "fn": 14.92822265625,
+            "cost": 41.197509765625,
+            "selected": 43.468505859375
+          },
+          "ppo_sequence/seed42": {
+            "fp": 11.395263671875,
+            "fn": 14.982177734375,
+            "cost": 41.359619140625,
+            "selected": 43.310791015625
+          },
+          "ppo_sequence/seed43": {
+            "fp": 12.425537109375,
+            "fn": 14.570556640625,
+            "cost": 41.566650390625,
+            "selected": 45.252197265625
+          },
+          "ppo_sequence/seed44": {
+            "fp": 11.73974609375,
+            "fn": 14.7177734375,
+            "cost": 41.17529296875,
+            "selected": 44.243896484375
+          }
+        },
+        "ppo_cost_comparisons": {
+          "ppo_sequence_vs_teacher_sequence": {
+            "cost": {
+              "mean": -0.6592610677083333,
+              "ci95": [
+                -1.0902358849831093,
+                -0.23587800580008392
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 1.5686813665594599
+          },
+          "ppo_sequence_vs_adapted_sequence": {
+            "cost": {
+              "mean": -0.07804361979166671,
+              "ci95": [
+                -0.16076061624673033,
+                -0.002034866067904426
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.18830542786959034
+          },
+          "ppo_sequence_vs_teacher_one_shot": {
+            "cost": {
+              "mean": 0.3527018229166667,
+              "ci95": [
+                0.19519732079909155,
+                0.5336018062850065
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": -0.8599445222684698
+          },
+          "ppo_sequence_vs_adapted_one_shot": {
+            "cost": {
+              "mean": 0.08992513020833336,
+              "ci95": [
+                -0.007258907574185455,
+                0.18860254573555754
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": -0.21785633311318262
+          }
+        }
+      },
+      "Rep2_to_Rep1": {
+        "n_cells": 4096,
+        "gene_count": 313,
+        "n_seeds": 3,
+        "cross_section": true,
+        "means": {
+          "teacher_sequence": {
+            "fp": 15.801432291666668,
+            "fn": 12.549641927083334,
+            "cost": 40.900716145833336,
+            "selected": 50.614420572916664
+          },
+          "adapted_sequence": {
+            "fp": 9.382080078125,
+            "fn": 15.768636067708332,
+            "cost": 40.91935221354167,
+            "selected": 37.72021484375
+          },
+          "ppo_sequence": {
+            "fp": 9.937744140625,
+            "fn": 15.424967447916666,
+            "cost": 40.787679036458336,
+            "selected": 38.906087239583336
+          },
+          "teacher_one_shot": {
+            "fp": 9.542399088541668,
+            "fn": 15.523518880208334,
+            "cost": 40.58943684895833,
+            "selected": 38.29166666666667
+          },
+          "adapted_one_shot": {
+            "fp": 9.455973307291668,
+            "fn": 15.626790364583334,
+            "cost": 40.70955403645833,
+            "selected": 38.045817057291664
+          }
+        },
+        "comparable_per_seed": {
+          "teacher_sequence/seed42": {
+            "fp": 15.73388671875,
+            "fn": 12.4541015625,
+            "cost": 40.64208984375,
+            "selected": 50.686279296875
+          },
+          "teacher_sequence/seed43": {
+            "fp": 16.746826171875,
+            "fn": 12.116455078125,
+            "cost": 40.979736328125,
+            "selected": 52.361328125
+          },
+          "teacher_sequence/seed44": {
+            "fp": 14.923583984375,
+            "fn": 13.078369140625,
+            "cost": 41.080322265625,
+            "selected": 48.795654296875
+          },
+          "adapted_sequence/seed42": {
+            "fp": 9.905029296875,
+            "fn": 15.42138671875,
+            "cost": 40.747802734375,
+            "selected": 38.862060546875
+          },
+          "adapted_sequence/seed43": {
+            "fp": 9.04638671875,
+            "fn": 15.9892578125,
+            "cost": 41.02490234375,
+            "selected": 36.984375
+          },
+          "adapted_sequence/seed44": {
+            "fp": 9.19482421875,
+            "fn": 15.895263671875,
+            "cost": 40.9853515625,
+            "selected": 37.314208984375
+          },
+          "ppo_sequence/seed42": {
+            "fp": 10.732666015625,
+            "fn": 14.917724609375,
+            "cost": 40.568115234375,
+            "selected": 40.617431640625
+          },
+          "ppo_sequence/seed43": {
+            "fp": 9.42236328125,
+            "fn": 15.7666015625,
+            "cost": 40.95556640625,
+            "selected": 37.763427734375
+          },
+          "ppo_sequence/seed44": {
+            "fp": 9.658203125,
+            "fn": 15.590576171875,
+            "cost": 40.83935546875,
+            "selected": 38.33740234375
+          }
+        },
+        "ppo_cost_comparisons": {
+          "ppo_sequence_vs_teacher_sequence": {
+            "cost": {
+              "mean": -0.11303710937499994,
+              "ci95": [
+                -0.5274723552151868,
+                0.28292884466819385
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.2763695114089473
+          },
+          "ppo_sequence_vs_adapted_sequence": {
+            "cost": {
+              "mean": -0.13167317708333326,
+              "ci95": [
+                -0.16694877033416708,
+                -0.09462232568429445
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.3217870517504438
+          },
+          "ppo_sequence_vs_teacher_one_shot": {
+            "cost": {
+              "mean": 0.19824218750000003,
+              "ci95": [
+                0.07216213263668508,
+                0.3355910774232336
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": -0.4884083221891134
+          },
+          "ppo_sequence_vs_adapted_one_shot": {
+            "cost": {
+              "mean": 0.07812500000000007,
+              "ci95": [
+                0.01882568240221467,
+                0.1352679995987429
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": -0.19190826784798615
+          }
+        }
+      },
+      "Rep2_to_Rep2": {
+        "n_cells": 4096,
+        "gene_count": 313,
+        "n_seeds": 3,
+        "cross_section": false,
+        "means": {
+          "teacher_sequence": {
+            "fp": 17.684814453125,
+            "fn": 11.913411458333332,
+            "cost": 41.51163736979167,
+            "selected": 55.638427734375
+          },
+          "adapted_sequence": {
+            "fp": 11.77197265625,
+            "fn": 14.21435546875,
+            "cost": 40.20068359375,
+            "selected": 44.77058919270833
+          },
+          "ppo_sequence": {
+            "fp": 12.361653645833334,
+            "fn": 13.896402994791668,
+            "cost": 40.15445963541667,
+            "selected": 45.966064453125
+          },
+          "teacher_one_shot": {
+            "fp": 11.482991536458332,
+            "fn": 14.310221354166668,
+            "cost": 40.103434244791664,
+            "selected": 44.23494466145833
+          },
+          "adapted_one_shot": {
+            "fp": 11.945475260416668,
+            "fn": 14.056396484375,
+            "cost": 40.05826822916667,
+            "selected": 45.251790364583336
+          }
+        },
+        "comparable_per_seed": {
+          "teacher_sequence/seed42": {
+            "fp": 18.15673828125,
+            "fn": 11.698486328125,
+            "cost": 41.5537109375,
+            "selected": 56.569091796875
+          },
+          "teacher_sequence/seed43": {
+            "fp": 18.45068359375,
+            "fn": 11.603515625,
+            "cost": 41.65771484375,
+            "selected": 57.011962890625
+          },
+          "teacher_sequence/seed44": {
+            "fp": 16.447021484375,
+            "fn": 12.438232421875,
+            "cost": 41.323486328125,
+            "selected": 53.334228515625
+          },
+          "adapted_sequence/seed42": {
+            "fp": 11.7705078125,
+            "fn": 14.151611328125,
+            "cost": 40.07373046875,
+            "selected": 44.822509765625
+          },
+          "adapted_sequence/seed43": {
+            "fp": 11.78515625,
+            "fn": 14.267333984375,
+            "cost": 40.31982421875,
+            "selected": 44.76611328125
+          },
+          "adapted_sequence/seed44": {
+            "fp": 11.76025390625,
+            "fn": 14.22412109375,
+            "cost": 40.20849609375,
+            "selected": 44.72314453125
+          },
+          "ppo_sequence/seed42": {
+            "fp": 12.604248046875,
+            "fn": 13.72216796875,
+            "cost": 40.048583984375,
+            "selected": 46.476318359375
+          },
+          "ppo_sequence/seed43": {
+            "fp": 12.216796875,
+            "fn": 14.0263671875,
+            "cost": 40.26953125,
+            "selected": 45.63232421875
+          },
+          "ppo_sequence/seed44": {
+            "fp": 12.263916015625,
+            "fn": 13.940673828125,
+            "cost": 40.145263671875,
+            "selected": 45.78955078125
+          }
+        },
+        "ppo_cost_comparisons": {
+          "ppo_sequence_vs_teacher_sequence": {
+            "cost": {
+              "mean": -1.357177734375,
+              "ci95": [
+                -1.8696542467297752,
+                -0.8314718683728729
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 3.269390995794901
+          },
+          "ppo_sequence_vs_adapted_sequence": {
+            "cost": {
+              "mean": -0.0462239583333333,
+              "ci95": [
+                -0.12153892273313208,
+                0.020592449048318442
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": 0.11498301571298414
+          },
+          "ppo_sequence_vs_teacher_one_shot": {
+            "cost": {
+              "mean": 0.051025390625000056,
+              "ci95": [
+                -0.12812813715648133,
+                0.22886366846754233
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": -0.12723446653857057
+          },
+          "ppo_sequence_vs_adapted_one_shot": {
+            "cost": {
+              "mean": 0.09619140625000008,
+              "ci95": [
+                0.010246533518547719,
+                0.17239053426469497
+              ],
+              "n_valid_cells": 4096
+            },
+            "relative_cost_reduction_percent": -0.24012871874466715
+          }
+        }
+      }
+    }
+  },
+  "historical_comparison": {
+    "reference": "reports/legacy_summary.json",
+    "reference_section": "evaluation.directions",
+    "methods": [
+      "teacher_sequence",
+      "adapted_sequence",
+      "ppo_sequence"
+    ],
+    "metrics": [
+      "fp",
+      "fn",
+      "cost",
+      "selected"
+    ],
+    "directions": [
+      "Rep1_to_Rep1",
+      "Rep1_to_Rep2",
+      "Rep2_to_Rep1",
+      "Rep2_to_Rep2"
+    ],
+    "aggregate_values": 48,
+    "per_seed_values": 144,
+    "total_values": 192,
+    "comparison": "Exact equality of parsed numeric values; no rounding or tolerance applied.",
+    "mismatched_values": 0,
+    "max_absolute_difference": 0,
+    "scope": "Only the three shared sequence methods and four listed metrics. One-shot results are reported above but excluded from this 192-value comparison. Checkpoint bytes and individual per-cell outputs were not compared."
+  },
+  "interpretation": {
+    "ppo_vs_fixed_sequence": "Small cross-section cost reductions: 0.1883% and 0.3218%; both spatial-block cost-difference intervals exclude zero.",
+    "one_shot": "Pretrained one-shot has the lowest cross-section mean cost among the five methods. These results do not establish an advantage of sequence RL over one-shot prediction.",
+    "external_baselines": "SpatialEx and original STRank were not retrained or reevaluated in this run; their scores remain historical references.",
+    "generalization": "The two sections are from the same specimen. This is same-data reproduction, not external patient validation."
+  },
+  "unit_tests": {
+    "status": "console_report_not_archived",
+    "note": "No unit-test pass count is certified by this report. Full training and test-set evaluation are documented separately."
+  },
+  "evidence_sha256": {
+    "results/reproduction_20261113/evaluation_summary.json": "d4e5f648ba49d0801e3d8bba54ea9bf3645eb7f07015d769bf1c1abd4f0c7111",
+    "runs/reproduction_20261113/run.json": "5ae6c29de0389ff7b9ef56fa6d2b2e3fdf90830dbbbe169803aee75dff4c3026",
+    "runs/reproduction_20261113/training_frozen.json": "a0f4acc0a1c481f85fa6fc5d9425a56f1bf463969845b5ed4138b9a20daa5c79",
+    "data/reproduction_20261113/preparation_provenance.json": "f25057e2c39c70f4059f6dd8c7a042c02f8739634f003d86243dfcfc8c081974",
+    "reports/legacy_summary.json": "6bef301c2b562349c3d623eeae364f0fffbca8d0d83a0cbffa8a7bf7e47476fc"
+  }
+}

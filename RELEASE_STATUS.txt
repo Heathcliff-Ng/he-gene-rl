@@ -1,16 +1,35 @@
-Project assembly: 2026-11-02
+Status updated: 2026-11-13
+Initial project assembly: 2026-11-02
 
-This directory packages an existing experimental implementation.
-The user requested that testing be deferred during project assembly.
-No unit tests, model inference, training, or reproduction experiments have been
-run for this standalone package. Existing tests are included for the next step.
-Static checks during assembly covered Python syntax, JSON parsing, local
-documentation links, package imports by source inspection, and copied artifact
-hashes. These do not establish runtime compatibility or numerical equivalence.
-Historical results in reports/ and docs/results.md were produced by the original
-experiment code; they are not a validation of this packaged version.
+Standalone reproduction completed on 2026-11-13. The user ran data preparation,
+full training from scratch, and test-set evaluation in the existing HERL Conda
+environment. Data preparation read the external Rank/datasets H5ad files using
+this package's code, without importing old Rank modules or reading old outputs
+or prediction layers.
 
-Local data, imported checkpoints, and generated predictions are excluded from
-Git and from the source archive. Original experiment files remain unchanged.
-No GitHub repository has been created or pushed by this packaging operation.
-No software license has been selected on the author's behalf.
+All three stages (pretraining, adaptation, PPO) completed for Rep1/Rep2 and
+seeds 42/43/44: six training combinations. Evaluation covered four source/target
+directions, 4,096 test cells per direction, 313 genes, and five methods, producing
+60 prediction archives. Training is frozen with complete=true.
+
+The three shared sequence methods reproduce all 192 comparable historical
+metrics exactly: 48 aggregate and 144 per-seed FP/FN/cost/selected values across
+four directions; maximum absolute difference is 0. This is metric equality,
+not a claim of checkpoint-byte or every per-cell prediction equality.
+Record: reports/reproduction_20261113.json
+Results and interpretation: docs/results.md
+Commands: docs/reproduction.md
+
+PPO improves cost over the adapted fixed-rule sequence by 0.19% and 0.32% on the
+two cross-section directions. Pretrained one-shot prediction still has lower
+cost in both directions. SpatialEx and original STRank were not retrained in
+this reproduction. The data cover two sections of the same specimen.
+
+No unit-test console report is included in this reproduction record, so it
+does not certify a test-suite pass count. Full training and test-set evaluation
+are independently documented above. The 2026-11-02 historical import reports
+retain their original provenance and import-time validation status.
+
+Local data, weights, logs, and per-cell predictions are excluded from Git and
+the source archive. The compact reproduction report is included with source.
+Repository license: MIT (LICENSE).

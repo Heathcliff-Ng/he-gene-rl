@@ -6,7 +6,9 @@ HE-Gene-RL 是一套根据 H&E 图像特征与空间上下文预测细胞表达�
 
 **推理不需要真实表达计数。** 输入为预先提取好的图像特征和坐标。本项目不包含切片图像预处理或 UNI 特征提取。
 
-**当前状态：项目整理已完成，但这次整理没有运行测试、训练或推理。** 原实验的训练和评价已经完成，其历史结果记录在 [docs/results.md](docs/results.md)。这些历史结果不能当作当前独立项目已经验证通过的证明。
+**当前状态：独立项目已于 2026-11-13 完成从头完整训练和测试集评估。** 本次直接读取外部 Rank 数据集重建划分，完成 Rep1/Rep2、种子 42/43/44 共六组模型的三个训练阶段。与历史实验共有的三种序列方法相比，**192 个指标完全一致**：48 个汇总指标、144 个逐种子指标，最大绝对差为 0。见[复现摘要](reports/reproduction_20261113.json)和[结果说明](docs/results.md)。
+
+评估覆盖四个源/目标方向，每方向 4,096 个测试细胞、313 个基因，以及五种方法。两个跨切片方向上，PPO 相对适配模型的固定规则序列选择降低成本 0.19% 和 0.32%；预训练模型的一次性预测成本仍然更低，当前结果不支持序列强化学习优于一次性预测。
 
 ## 方法与训练阶段
 
@@ -41,7 +43,7 @@ PPO 选择计数为零、为一、至少为二的基因，分别得到 `-1 / 0 /
 python -m pip install -e '.[test]'
 ```
 
-以下指令用于后续运行，本次整理尚未执行。
+以下说明各运行入口。本次完成的复现使用已有 `HERL` Conda 环境，完整命令见 [docs/reproduction.md](docs/reproduction.md)。
 
 ## 数据
 
@@ -49,13 +51,23 @@ python -m pip install -e '.[test]'
 
 格式模板见 [examples/data_manifest.json](examples/data_manifest.json)，完整说明见 [docs/data_format.md](docs/data_format.md)。
 
-如果本机保留了原 Rank 工作区，可用迁移脚本生成独立数据目录：
+可以用项目内部的数据准备代码，直接从外部 Rank `datasets` 目录重建历史划分：
+
+```bash
+python scripts/prepare_rank_data.py \
+  --datasets-root ../datasets --source-variant with-spatialex \
+  --output data
+```
+
+该入口读取原始计数、UNI 特征、坐标和细胞/基因身份，不读取旧 `outputs`，也不导入 Rank 模块。`with-spatialex` 用于选择历史实验使用的原文件版本，其中的预测层不会被读取。数据准备所需的 `h5py` 已列入 `data` 和 `test` 可选依赖。
+
+如果本机保留了原 Rank 工作区，也可选择迁移已有的整理数据：
 
 ```bash
 python scripts/export_legacy_data.py --rank-root .. --output data
 ```
 
-只有这个迁移步骤需要原工作区。正常训练和推理不依赖旧项目的 Python 模块。
+为新的输出目录选择其中一种数据准备方式即可。正常训练和推理使用生成的 manifest，不依赖旧项目的 Python 模块。
 
 ## 训练
 
@@ -118,7 +130,7 @@ he-gene-rl compare \
   --output results/ppo_vs_external.json
 ```
 
-两个预测文件都需要布尔型 `selected_mask` 或 `selected`，以及 `cell_ids`、完整且有序的 `gene_ids`。细胞顺序可以自动对齐，基因顺序必须预先与数据面板一致。格式详见 [docs/data_format.md](docs/data_format.md#prediction-and-external-baseline-archives)。这只是已经准备好的比较接口，必须在后续手工运行测试与评价后，才能得知独立项目的新结果。
+两个预测文件都需要布尔型 `selected_mask` 或 `selected`，以及 `cell_ids`、完整且有序的 `gene_ids`。细胞顺序可以自动对齐，基因顺序必须预先与数据面板一致。格式详见 [docs/data_format.md](docs/data_format.md#prediction-and-external-baseline-archives)。本次复现已评估五种内部方法；外部方法比较需要另行准备对齐的预测文件。
 
 项目包含本方法及其内部对照，不包含 SpatialEx 或原 STRank 基线的独立训练实现。原实验中的基线结果保留在历史结果文档中。
 
@@ -132,14 +144,15 @@ he-gene-rl compare \
 | `src/he_gene_rl/ppo.py` | PPO 策略、奖励与更新 |
 | `src/he_gene_rl/core.py` | 逐步选择、预测计数回填与停止 |
 | `src/he_gene_rl/data.py` | 数据接口、邻居和归一化 |
+| `src/he_gene_rl/preparation.py` | 直接读取 H5ad 并重建历史划分 |
 | `configs/default.json` | 正式训练配置 |
-| `scripts/` | 原工作区数据与权重迁移工具 |
-| `tests/` | 留待下一轮运行的测试 |
+| `scripts/` | 数据准备、原工作区数据与权重迁移工具 |
+| `tests/` | 单元测试和数据接口检查 |
 
-后续验证可从 `python -m pytest` 开始。本次没有运行测试，也没有重新训练或测量性能。
+单元测试命令为 `python -m pytest`。复现摘要记录了已完成的训练和测试集评估，不包含保存的单元测试终端报告或通过数量。
 
 ## 上传 GitHub
 
-项目的 `.gitignore` 排除了数据、权重、预测文件和本地运行目录。小体积的历史汇总可以与源码一起上传。数据与权重可以另行发布，具体以其来源许可为准。
+项目的 `.gitignore` 排除了数据、权重、预测文件和本地运行目录。小体积的历史汇总和独立版复现摘要随源码保存。数据与权重可以另行发布，具体以其来源许可为准。
 
-当前没有擅自指定软件许可证、作者、论文 DOI 或仓库地址。发布前应由项目所有者选择所需许可证。本次整理不会创建远程仓库或自动上传。
+源代码采用 [MIT 许可证](LICENSE)。数据和权重的分发仍应遵守各自来源的适用条款。

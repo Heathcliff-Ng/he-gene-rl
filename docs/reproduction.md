@@ -1,6 +1,6 @@
 # Running and verifying the project
 
-This project separates source packaging, importing historical artifacts, training, prediction, and evaluation. Packaging has been performed without executing tests, training, or inference. The commands below are instructions for the later verification stage, not a log of completed checks.
+Full standalone training from scratch and test-set evaluation completed on 2026-11-13 using this package and the external Rank datasets. All 192 comparable aggregate and per-seed metrics match the historical experiment exactly. The compact record is [reports/reproduction_20261113.json](../reports/reproduction_20261113.json); [results and interpretation](results.md) distinguish the new run from historical baselines. The initial 2026-11-02 packaging step only imported historical artifacts.
 
 ## Install the source package
 
@@ -50,6 +50,81 @@ runs/legacy/
 The same layout is repeated for each configured source and seed. Stage summaries live next to their checkpoints. `adaptation/best.pt` and `ppo/best.pt` form the final deployed pair; `pretraining/best.pt` supplies the pretrained comparison variants.
 
 ## Train a new run
+
+### Rebuild directly from the external Rank datasets
+
+The standalone data preparation code can rebuild the historical cell partitions
+directly from `../datasets`. It reads raw counts, UNI features, image coordinates,
+and cell/gene identities. It imports no original Rank modules and reads no old
+outputs or checkpoints. The fixed spatial boundary and identity-hash sampling
+recipe selects 65,536 training, 8,192 policy, 1,024 monitor, 1,024 calibration,
+and 4,096 test cells per section.
+
+The completed reproduction used the existing `HERL` Conda environment. The
+commands below document that workflow, including the corrected external log
+directory. The preparation, training, and evaluation outputs already exist on
+the original workstation; choose new output paths for a separate run. The
+optional unit-test command is shown for checking the environment, but its
+console report is not included in the reproduction record. Start in a terminal:
+
+```bash
+conda activate HERL
+cd /home/p3/PyCharmProjects/Rank/he-gene-rl
+export PYTHONPATH="$PWD/src"
+export OPENBLAS_NUM_THREADS=4
+export OMP_NUM_THREADS=4
+set -o pipefail
+
+python -c 'import numpy, scipy, h5py, pytest, torch; print(torch.__version__); assert torch.cuda.is_available(); print(torch.cuda.get_device_name(0))'
+python -m pytest -q
+
+python scripts/prepare_rank_data.py \
+  --datasets-root ../datasets --source-variant with-spatialex \
+  --output data/reproduction_20261113
+
+mkdir -p runs/logs
+python -u -m he_gene_rl train \
+  --config configs/default.json \
+  --data data/reproduction_20261113/manifest.json \
+  --output runs/reproduction_20261113 --device cuda \
+  2>&1 | tee -a runs/logs/reproduction_20261113.train.log
+
+python -u -m he_gene_rl evaluate-run \
+  --run runs/reproduction_20261113 \
+  --data data/reproduction_20261113/manifest.json \
+  --output results/reproduction_20261113 --device cuda \
+  2>&1 | tee -a runs/logs/reproduction_20261113.evaluate.log
+
+cat results/reproduction_20261113/RESULTS.txt
+```
+
+Keep shell logs outside the training and evaluation output directories. Both
+commands require an empty directory when initializing a new output; `tee`
+can create its log before the command checks that directory.
+
+Proceed to each step only after the preceding command succeeds. The default
+configuration trains all three stages from scratch for Rep1/Rep2 and seeds
+42/43/44. Evaluation covers both cross-section directions and same-section
+controls with five method variants. This is the full historical protocol,
+not a small smoke run or a fit over every available cell.
+
+`with-spatialex` selects the exact source filenames used by the historical
+pipeline (`*_full_with_spatialex_all_pred.h5ad`); the preparation code never
+loads their prediction layers. The default `plain` option selects `*_full.h5ad`,
+whose relevant fields have not yet been checked for equivalence. Source H5ad
+files are opened read-only. Prepared arrays and their provenance stay under
+this project. No new environment is needed; preparation requires `h5py`
+(also declared in the optional `data`/`test` dependencies).
+
+The historical PPO costs (`FP + 2 FN`, lower is better), averaged over three
+seeds, are **41.3672** for Rep1 to Rep2 and **40.7877** for Rep2 to Rep1.
+Compare all FP/FN/cost values and the fixed-rule and one-shot controls in
+[the results](results.md), not just these two means. The completed standalone
+run reproduced all 192 comparable metrics exactly. This verifies the reported
+metrics for the documented dataset and protocol; it does not assert equality
+of checkpoint bytes or every per-cell output.
+
+### Generic portable-manifest training
 
 ```bash
 he-gene-rl train \
@@ -127,17 +202,27 @@ Both `evaluate` and `compare` accept `--neighbors`, defaulting to eight, for the
 
 SpatialEx and original STRank historical baseline scores are documented but their training implementations are not bundled into this standalone method package. A new dataset requires new, appropriately aligned baseline outputs before making a new comparison claim.
 
-## Planned verification order
+## Verification record
 
-No items in this list are marked complete for the reorganized project:
+| Check | Recorded status on 2026-11-13 |
+|---|---|
+| Direct H5ad preparation with historical split rules | Completed for Rep1 and Rep2 using internal code |
+| Full pretraining, adaptation, and PPO | Completed for both sources and seeds 42/43/44 |
+| Frozen test-set evaluation | Completed: four directions, five methods, 60 prediction archives |
+| Historical metric comparison | All 192 comparable values identical; maximum absolute difference 0 |
+| Unit tests | Console report not archived; no pass count claimed here |
+| Interrupted-training resume and byte/per-cell parity checks | Not established by this report |
 
-1. Run `python -m pytest` to check the migrated unit tests and portable data contracts.
-2. Use a small source-only dataset to exercise pretraining, adaptation, checkpoint resume, and PPO.
-3. Compare imported historical models on a fixed small image batch against the saved original implementation, including gene identities, selected sets, sequence order, and predicted history values.
-4. Evaluate complete imported historical runs only after establishing the source and input correspondence.
-5. Train a new formal run, with all model selection completed before examining its test results.
+The metric comparison covers FP, FN, cost, and selected-gene count for
+`teacher_sequence`, `adapted_sequence`, and `ppo_sequence`: 48 direction-level
+means plus 144 per-seed means. One-shot methods were also evaluated in the new
+run, but are outside this 192-value comparison. The historical import records
+retain their import-time status; the new report records the completed standalone
+run separately. There is no need to rerun training merely to update documentation.
 
-The old experiment's exact numerical results can depend on software versions, numerical settings, and the original feature bank. Record the environment and verify parity before claiming exact reproduction. The old adaptation-plus-PPO run took approximately 10.5 minutes on its original hardware; that excludes the prior predictor pretraining and is not a runtime guarantee for a new run.
+Exact numerical results can depend on software versions, numerical settings,
+and the feature bank. This record establishes reproduction on the documented
+workstation and data, not on every platform or a new patient cohort.
 
 ## Preparing a source release
 
@@ -164,6 +249,6 @@ git add .
 git commit -m "Initial HE-Gene-RL project"
 ```
 
-Add your own GitHub remote afterward. No remote URL is configured by these files.
-
-Choose a repository license and supply any desired authorship/citation information explicitly. No publication identifier, license grant, or external download URL has been invented during this reorganization.
+For a new checkout without a remote, add the intended GitHub remote afterward.
+An existing checkout can use its configured `origin` and does not need to be
+initialized again. The repository uses the [MIT license](../LICENSE).

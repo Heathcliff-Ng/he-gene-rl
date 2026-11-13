@@ -6,7 +6,9 @@ HE-Gene-RL predicts an expressed-gene set for each cell from H&E image embedding
 
 Inference requires image embeddings and coordinates, not measured gene expression. The project consumes precomputed embeddings; image preprocessing and UNI feature extraction are outside this package.
 
-**Status:** the original experiment has completed training and evaluation. This standalone project is a code reorganization, and its tests, training, and inference have deliberately not been run during this packaging step. Historical results are documented separately in [docs/results.md](docs/results.md); they are not validation of this package.
+**Status: full standalone training and test-set evaluation completed on 2026-11-13.** The package rebuilt its data directly from the external Rank datasets and trained all three stages from scratch for Rep1/Rep2 with seeds 42, 43, and 44. Across the three sequence methods shared with the historical experiment, all **192 compared metrics match exactly** (48 aggregate and 144 per-seed values; maximum absolute difference 0). See [the reproduction summary](reports/reproduction_20261113.json) and [results](docs/results.md).
+
+Evaluation covered four source/target directions, 4,096 test cells per direction, 313 genes, and five method variants. PPO reduced cost relative to the adapted predictor's fixed sequence rule by 0.19% and 0.32% in the two cross-section directions. The pretrained one-shot predictor still had lower cost in both directions; these results do not establish an advantage of sequence RL over one-shot prediction.
 
 ## Method
 
@@ -40,7 +42,7 @@ Use Python 3.10 or newer with NumPy, SciPy, and PyTorch 2.7 or newer, as declare
 python -m pip install -e '.[test]'
 ```
 
-The commands below are prepared entry points for subsequent use. They have not been executed as part of this reorganization.
+The commands below describe the supported workflows. The completed run used the existing `HERL` Conda environment; its full command sequence is recorded in [docs/reproduction.md](docs/reproduction.md).
 
 ## Prepare data
 
@@ -48,13 +50,23 @@ Provide a JSON manifest pointing to image banks and named cell splits. All relat
 
 Use [examples/data_manifest.json](examples/data_manifest.json) as a template and [docs/data_format.md](docs/data_format.md) for array shapes, split requirements, and label-free deployment.
 
-If the original Rank workspace is available locally, its data can be exported without importing that project's Python modules:
+To rebuild the historical data partitions directly from an external Rank `datasets` directory, use the standalone preparation code:
+
+```bash
+python scripts/prepare_rank_data.py \
+  --datasets-root ../datasets --source-variant with-spatialex \
+  --output data
+```
+
+This reads raw counts, UNI features, coordinates, and cell/gene identities. It reconstructs the historical partitions without loading old outputs or importing Rank modules. `with-spatialex` selects the source filenames used in the historical experiment; their prediction layers are ignored. Preparation requires `h5py`, included in the `data` and `test` optional dependencies.
+
+Alternatively, an existing Rank workspace's prepared data can be exported:
 
 ```bash
 python scripts/export_legacy_data.py --rank-root .. --output data
 ```
 
-The original workspace is needed only for this migration helper. Normal training and inference use the portable manifest and this package.
+Choose one preparation route for a new output directory. Normal training and inference use the resulting portable manifest and this package.
 
 ## Train
 
@@ -119,7 +131,7 @@ he-gene-rl compare \
   --output results/ppo_vs_external.json
 ```
 
-Both archives need a boolean `selected_mask` (or `selected`), unique `cell_ids`, and the complete ordered `gene_ids`. Cell order is aligned automatically; gene order must already match the dataset. See [the prediction archive format](docs/data_format.md#prediction-and-external-baseline-archives). The comparison reports paired differences and, where spatial blocks permit, spatial-block confidence intervals. A new performance claim requires actually running and checking these commands; this package does not infer new results from the historical report.
+Both archives need a boolean `selected_mask` (or `selected`), unique `cell_ids`, and the complete ordered `gene_ids`. Cell order is aligned automatically; gene order must already match the dataset. See [the prediction archive format](docs/data_format.md#prediction-and-external-baseline-archives). The comparison reports paired differences and, where spatial blocks permit, spatial-block confidence intervals. The completed reproduction evaluated the five internal variants; external comparisons require separately prepared predictions.
 
 The package contains the proposed method and its internal variants. It does not contain a standalone implementation or retraining pipeline for SpatialEx or the historical STRank baseline. Historical baseline scores are recorded in [docs/results.md](docs/results.md).
 
@@ -135,17 +147,18 @@ src/he_gene_rl/
   ppo.py                 Actor/critic, rewards, and PPO updates
   core.py                Label-free sequence transitions and final metrics
   data.py                Portable data loading and source normalization
+  preparation.py         Direct H5ad loading and historical split reconstruction
   information.py         Conditional prediction diagnostics and statistics
-scripts/                 Optional migration helpers for the original workspace
-tests/                   Tests reserved for the next verification stage
-docs/                    Method, data, historical results, reproduction
-reports/                 Small historical aggregate records
+scripts/                 Direct data preparation and optional migration helpers
+tests/                   Unit tests and data-contract checks
+docs/                    Method, data, results, reproduction
+reports/                 Historical aggregates and standalone reproduction summary
 ```
 
-The next verification stage can start with `python -m pytest`. No test-passing badge or reproduction claim is made for this reorganized version.
+Run `python -m pytest` for the unit tests. The reproduction summary records completed training and test-set evaluation; it does not include a saved unit-test terminal report or a unit-test pass count.
 
 ## Publishing
 
-Data banks, model checkpoints, prediction archives, and local run directories are excluded by `.gitignore`. The small historical aggregate report can accompany the code. Checkpoints and datasets can be distributed separately if desired and permitted by their source terms.
+Data banks, model checkpoints, prediction archives, and local run directories are excluded by `.gitignore`. The small historical aggregate and standalone reproduction summaries accompany the code. Checkpoints and datasets can be distributed separately if desired and permitted by their source terms.
 
-No software license has been selected for this repository yet. Choose the intended license before offering it for reuse. No author list, paper DOI, or GitHub repository URL is assumed by this package.
+The source code is distributed under the [MIT License](LICENSE). Dataset and checkpoint distribution remains subject to the applicable source terms.
